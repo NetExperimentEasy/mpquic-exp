@@ -7,5 +7,10 @@ mpquic (xquic) 在minitopo实验
 - `cd tmp`
 - `mprun -t ../topo -x ../exp`
 
-> 本实验需要将测试用例的MAX_BUF_SIZE调大 >> https://github.com/NetExperimentEasy/static-build-xquic
-> 实验控制，需要修改xquic.py
+> 本仓库附带的server和client已经将MAX_BUF_SIZE调大 >> https://github.com/NetExperimentEasy/static-build-xquic
+
+> 更多实验控制，需要修改xquic.py
+
+TODO：
+
+- [ ] 多路径实验
