@@ -13,6 +13,24 @@ mpquic (xquic) 在minitopo实验
 
 > 目前数据分析只能通过wireshark分析pcap包
 
-TODO：
 
-- [ ] 多路径实验
+# 多路径对比图
+
+链路情况：
+
+```
+    40ms,20mbps
+ /-sw---bl---sw-\ 
+c                r                s
+ \-sw---bl---sw-/ \-sw---bl---sw-/
+    40ms,30mbps
+```
+
+拥塞算法:bbr
+
+单路径：
+![](./pics/2023-03-10_14-11-%E5%8D%95%E8%B7%AF%E5%BE%84.png)
+
+多路径：
+![](./pics/2023-03-10_14-13-%E5%A4%9A%E8%B7%AF%E5%BE%84.png)
+
