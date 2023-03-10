@@ -11,6 +11,8 @@ mpquic (xquic) 在minitopo实验
 
 > 更多实验控制，需要修改xquic.py
 
+> 目前数据分析只能通过wireshark分析pcap包
+
 TODO：
 
 - [ ] 多路径实验
