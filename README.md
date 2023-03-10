@@ -3,7 +3,7 @@ mpquic (xquic) 在minitopo实验
 # 运行本实验，你首先需要安装mininet和minitopo
 参考这个仓库：https://github.com/NetExperimentEasy/sigcomm20_mptp_tutorial_for_CN
 
-# 运行前，还向minitopo增加xquic实验脚本
+# 运行前，还得向minitopo增加xquic实验脚本
 向minitopo的experiments目录下增加本目录experiments中的xquic.py
 
 # 在tmp目录下进行实验
