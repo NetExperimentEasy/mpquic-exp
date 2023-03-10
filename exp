@@ -1,0 +1,6 @@
+xpType:xquic
+xquicServer:/home/seclee/xquicmp/exp/xquic/server
+xquicClient:/home/seclee/xquicmp/exp/xquic/client
+clientPcap:no
+serverPcap:yes
+snaplenPcap:100
