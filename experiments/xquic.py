@@ -35,6 +35,8 @@ class XquicScenario(Experiment):
     def xquic_command(
             self,
             type,
+            multipath=False,
+            interface=[],
             server_ip='127.0.0.1',
             server_port=8443,
             file_size=304857600,
@@ -47,21 +49,30 @@ class XquicScenario(Experiment):
                 50Mb/?B : 52428800
                 10M : 10485760
             """
+            if multipath:
+                multi_path_arg="-M"
+            else:
+                multi_path_arg=""
+            multi_interface_arg =""
+            if len(interface) > 0:
+                for item in interface:
+                    multi_interface_arg+=f" -i {item}"
+
             if type == 'server':
-                return f"{self.server} -l e > /dev/null"
+                return f"{self.server} -l e {multi_path_arg} > /dev/null"
             elif type == 'client':
                 cmd = f"{self.client} -l e -a {server_ip}" \
-                    + f" -p {server_port} -s {file_size} -c b -T"  # -c b : default cc bbr
+                    + f" -p {server_port} -s {file_size} -c b -T {multi_path_arg} {multi_interface_arg}"  # -c b : default cc bbr
                 return cmd
 
 
-    def get_client_cmd(self, server_ip):
-        s = self.xquic_command(type="client", server_ip=server_ip)
+    def get_client_cmd(self, server_ip, multipath=False, interfaces=[]):
+        s = self.xquic_command(type="client", server_ip=server_ip, multipath=multipath, interface=interfaces)
         logging.info(s)
         return s
 
-    def get_server_cmd(self):
-        s = self.xquic_command(type="server")
+    def get_server_cmd(self, multipath=False):
+        s = self.xquic_command(type="server", multipath=multipath)
         logging.info(s)
         return s
 
@@ -69,11 +80,20 @@ class XquicScenario(Experiment):
         super(XquicScenario, self).clean()
 
     def run(self):
-        cmd = self.get_server_cmd()
+        # 目前(xquic v1.4)只有客户端需要指定interface
+        interfaces = self.topo.get_interface_names(self.topo_config.client)
+
+        ifmultipath = True
+
+        # multipath exp
+        cmd = self.get_server_cmd(multipath=ifmultipath)
         cmd += " &"  # run backend
         self.topo.command_to(self.topo_config.server, cmd)
-
         self.topo.command_to(self.topo_config.client, "sleep 2")
-        cmd = self.get_client_cmd(server_ip=self.topo_config.get_server_ip())
+
+        if ifmultipath:
+            cmd = self.get_client_cmd(server_ip=self.topo_config.get_server_ip(), multipath=ifmultipath, interfaces=interfaces)
+        else:
+            cmd = self.get_client_cmd(server_ip=self.topo_config.get_server_ip())
         self.topo.command_to(self.topo_config.client, cmd)
         self.topo.command_to(self.topo_config.client, "sleep 2")
