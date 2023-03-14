@@ -1,6 +1,10 @@
 xpType:xquic
-xquicServer:/home/seclee/xquicmp/exp/xquic/server
-xquicClient:/home/seclee/xquicmp/exp/xquic/client
+# 本仓库目录的静态编译好的，自行修改为自己的绝对目录
+xquicServer:/home/seclee/xquicmp/exp/xquic/test_server
+xquicClient:/home/seclee/xquicmp/exp/xquic/test_client
+# 本地forlcc环境
+# xquicServer:/home/seclee/xquic/xquic_forrlcc/build/test_server
+# xquicClient:/home/seclee/xquic/xquic_forrlcc/build/test_client
 clientPcap:no
 serverPcap:yes
 snaplenPcap:100
