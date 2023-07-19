@@ -38,3 +38,4 @@ c                r                s
 ![](./pics/2023-03-10_14-13-%E5%A4%9A%E8%B7%AF%E5%BE%84.png)
 
 > 为确保试验性能，编译xquic时尽量编译Release，运行测试时 -l e 指定log为error级别而非debug级别（很吃性能）
+> 尽量采用小点的BDP环境测试，xquic实测打不满很大的带宽
